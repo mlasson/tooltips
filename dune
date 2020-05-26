@@ -1,0 +1,17 @@
+(executable
+ (name main)
+ (libraries ocaml-vdom bindings)
+ (modes js)
+ (preprocess
+  (pps gen_js_api.ppx))
+ (link_flags -no-check-prims))
+
+(rule
+ (targets main.js)
+ (deps main.bc.js)
+ (action
+  (run cp %{deps} %{targets})))
+
+(alias
+ (name DEFAULT)
+ (deps main.js index.html))

@@ -1,0 +1,12 @@
+(rule
+ (targets popper.ml)
+ (deps popper.mli)
+ (action
+  (run %{bin:gen_js_api} %{deps})))
+
+(library
+ (name bindings)
+ (synopsis "Bindings")
+ (libraries gen_js_api ocaml-vdom)
+ (modes byte)
+ (js_of_ocaml))
